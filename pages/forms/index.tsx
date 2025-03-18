@@ -1,22 +1,24 @@
+/* eslint-disable react/no-unescaped-entities */
+import { Check } from '@mui/icons-material';
 import { TextField, Stack, Paper, Checkbox, Box, RadioGroup, Radio, FormControlLabel, FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
+import { useState } from 'react';
 
 
 export default function FormsPage() {
 
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
 
   return <>
-    <Typography>
+    <Typography my={1}>
       On this page, you can exercise interacting with different types of form elements.
     </Typography>
-    <Typography>
-      Each element has a different set of attributes, such as id, name or label, and
-      different accessibility features such as { }
+    <Typography my={1}>
+      Each element has a different set of attributes, such as id, name or label, and different accessibility features such as { }
       <Link href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/WAI-ARIA_basics">aria attributes</Link>.
-    </Typography >
-    <Typography>
-      Set the values of each of the following elements as instructed.
+      Use your automation tool to interact with the elements and assert that you receive success messages after completing each challenge.
     </Typography>
 
     <Stack gap={2} mt={2}>
@@ -25,15 +27,26 @@ export default function FormsPage() {
           The following input has an id and a name that can be used to reference it in automated tests.
           Fill in the input with any name to mark it as completed:
         </Typography>
-        <TextField id="firstname" name="firstname" label="First name" variant="outlined" />
+
+        <Stack gap={2} direction="row" alignItems="center">
+          <TextField id="firstname" name="firstname" label="First name" variant="outlined" value={firstname} onChange={e => setFirstname(e.target.value)} />
+
+          {firstname && <Check color="success" />}
+        </Stack>
+
       </Challenge>
       <Challenge>
         <Typography>
           The following input has no id or name, so selecting it in an automated test can be more difficult.
           Fill in the input with any name to mark it as completed:
         </Typography>
-        <Typography component="label" variant="body2">Last name:</Typography>
-        <TextField variant="outlined" />
+        <Box>
+          <Typography component="label" variant="body2">Last name:</Typography>
+          <Stack gap={2} direction="row" alignItems="center">
+            <TextField variant="outlined" value={lastname} onChange={e => setLastname(e.target.value)} />
+            {lastname && <Check color="success" />}
+          </Stack>
+        </Box>
       </Challenge>
       <Challenge>
         <Typography>

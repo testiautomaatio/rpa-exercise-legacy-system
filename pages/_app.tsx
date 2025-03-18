@@ -4,15 +4,13 @@ import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
 import Head from 'next/head';
 import { AppCacheProvider } from '@mui/material-nextjs/v14-pagesRouter';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import type { Navigation } from '@toolpad/core/AppProvider';
 
 
 import theme from '../theme';
-import { LockClock } from '@mui/icons-material';
+import { AspectRatio, AvTimer, DynamicForm, Home, ManageHistory } from '@mui/icons-material';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: React.ReactElement) => React.ReactNode;
@@ -26,27 +24,32 @@ type AppPropsWithLayout = AppProps & {
 const NAVIGATION: Navigation = [
   {
     kind: 'header',
-    title: 'Main items',
+    title: 'Sections',
   },
   {
     segment: '',
     title: 'Home',
-    icon: <DashboardIcon />,
+    icon: <Home />,
   },
   {
     segment: 'forms',
     title: 'Form elements',
-    icon: <ShoppingCartIcon />,
+    icon: <DynamicForm />,
   },
   {
     segment: 'delays',
     title: 'Delays',
-    icon: <LockClock />,
+    icon: <AvTimer />,
   },
   {
     segment: 'datetime',
     title: 'Datetime',
-    icon: <LockClock />,
+    icon: <ManageHistory />,
+  },
+  {
+    segment: 'responsive',
+    title: 'Responsive pages',
+    icon: <AspectRatio />,
   },
 ];
 
@@ -70,6 +73,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
     <React.Fragment>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <title>Interaction playground 🎭</title>
       </Head>
       <NextAppProvider
         navigation={NAVIGATION}
