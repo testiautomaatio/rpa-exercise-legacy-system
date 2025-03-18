@@ -18,10 +18,10 @@ export default function DatetimePage() {
 
 
   return <>
-    <Typography mb={2}>
+    <Typography my={1}>
       Not many things look as outdated as websites (or course material) with past dates in them.
     </Typography>
-    <Typography mb={2}>
+    <Typography my={1}>
       This page has a dynamically changing element that displays the current year.
       Use your automation tool to verify that the copyright notice updates dynamically based
       on the browser&apos;s time. Set the time to year 2033 and verify that the year is displayed correctly.
@@ -33,9 +33,16 @@ export default function DatetimePage() {
           Copyright &copy; {year} Acme Corp.
         </Typography>
       </Challenge>
-      <Alert severity="success" variant="filled">
-        You successfully set the date to 2033!
-      </Alert>
+      {
+        year === 2033 ?
+          <Alert severity="success" variant="filled">
+            You successfully set the date to 2033!
+          </Alert>
+          :
+          <Alert severity="warning" variant="outlined">
+            Your system time is set to year {year}. Set the date to 2033 in your automation tool to pass this challenge.
+          </Alert>
+      }
     </Stack>
   </>;
 }

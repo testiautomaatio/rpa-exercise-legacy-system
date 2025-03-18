@@ -30,7 +30,7 @@ const NAVIGATION: Navigation = [
   },
   {
     segment: '',
-    title: 'Dashboard',
+    title: 'Home',
     icon: <DashboardIcon />,
   },
   {

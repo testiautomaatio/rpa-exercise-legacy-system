@@ -10,20 +10,23 @@ export default function DelaysPage() {
   useEffect(() => {
     const interval = setInterval(() => {
       setTicks((ticks) => ticks + 1);
-    }, 1000);
+    }, 100);
 
     return () => clearInterval(interval);
   }, []);
 
-  const buttonPercentage = Math.min(ticks * 20, 100);
-  const buttonDisabled = ticks < 5;
+  const inputPercentage = Math.min(ticks * 3.33, 100);
+  const inputHidden = ticks < 30;
+
+  const buttonPercentage = Math.min(ticks * 2, 100);
+  const buttonDisabled = ticks < 50;
 
   return <>
-    <Typography>
+    <Typography my={1}>
       Pages can be slow to load for a variety of reasons. This page simulates a slow loading page,
       where elements appear on the page or become editable after a delay.
     </Typography>
-    <Typography>
+    <Typography my={1}>
       Use your test automation tool to interact with the elements but take into account that the elements
       might not be immediately available.
     </Typography >
@@ -35,9 +38,12 @@ export default function DelaysPage() {
         Use your automation tool to insert any text into it to pass this challenge.
       </Typography>
       <Stack justifyContent="center" alignItems="center" gap={2} direction="row" >
-        <div style={{ visibility: ticks < 3 ? 'hidden' : undefined }}>
-          <TextField variant="outlined" />
-        </div>
+        <Stack justifyContent="center" alignItems="center" gap={2} direction="row" >
+          <Progress percentage={inputPercentage} />
+          <div style={{ visibility: inputHidden ? 'hidden' : undefined }}>
+            <TextField variant="outlined" />
+          </div>
+        </Stack>
       </Stack>
     </Challenge>
 
@@ -49,20 +55,8 @@ export default function DelaysPage() {
         After clicking, assert that a success message appears.
       </Typography>
       <Stack justifyContent="center" alignItems="center" gap={2} direction="row" >
-        <Button variant="contained" disabled={buttonDisabled}>Click me!</Button>
         <Progress percentage={buttonPercentage} />
-      </Stack>
-    </Challenge>
-
-    <Challenge>
-      <Typography>
-        The following button is on the page from the start, but will become enabled after
-        a delay. Use your automation tool to click it to pass this challenge.
-        After clicking, assert that a success message appears.
-      </Typography>
-      <Stack justifyContent="center" alignItems="center" gap={2} direction="row" >
         <Button variant="contained" disabled={buttonDisabled}>Click me!</Button>
-        <Progress percentage={buttonPercentage} />
       </Stack>
     </Challenge>
   </>;
