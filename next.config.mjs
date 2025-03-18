@@ -1,6 +1,7 @@
 
-  /** @type {import('next').NextConfig} */
-  const nextConfig = {
-    transpilePackages: ["next-auth"],
-  };
-  export default nextConfig;
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  transpilePackages: ["next-auth"],
+  output: "export"
+};
+export default nextConfig;
