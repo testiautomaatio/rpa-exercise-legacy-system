@@ -14,7 +14,7 @@ const SIZES = {
 } as const;
 
 export default function ResponsivePage() {
-    // this trick  is used to prevent the responsive components from rendering before the applications context, including theme, is loaded
+    // This "trick"  is used to prevent the responsive components from rendering before the applications context, including theme, is loaded.
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -116,7 +116,7 @@ function ViewportSizeChallenge() {
 
             <ResolutionTable width={width} sizes={sizes} />
             <SuccessMessage condition={done} text="You have successfully tested all supported screen sizes!" />
-            <InfoMessage condition={!done} text="Keep resizing the viewport to match the breakpoints and verify that the correct content is displayed." />
+            <InfoMessage condition={!done} text="Keep resizing the viewport to match the specified breakpoints and verify that the correct content is displayed." />
         </Challenge >
     </>
 }

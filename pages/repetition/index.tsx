@@ -27,18 +27,18 @@ function ManyBoxesChallenge() {
     const MIN_COUNT = 45;
     const MAX_COUNT = 55;
 
-    const [todos, setBoxes] = useState<TodoType[]>([]);
+    const [todos, setTodos] = useState<TodoType[]>([]);
 
-    const checkedBoxes = todos.filter(todo => todo.completed).length;
-    const allBoxesChecked = todos.length > 0 && checkedBoxes === todos.length;
+    const completedTodos = todos.filter(todo => todo.completed).length;
+    const allTodosComplete = todos.length > 0 && completedTodos === todos.length;
 
     useEffect(() => {
         const count = MIN_COUNT + Math.ceil(Math.random() * (MAX_COUNT - MIN_COUNT));
-        setBoxes(generateTodoList(count));
+        setTodos(generateTodoList(count));
     }, []);
 
     function toggleBox(target: TodoType): void {
-        setBoxes(todos => todos.map((todo) => todo.id === target.id ? { ...target, completed: !target.completed } : todo));
+        setTodos(todos => todos.map((todo) => todo.id === target.id ? { ...target, completed: !target.completed } : todo));
     }
 
     return (
@@ -50,14 +50,14 @@ function ManyBoxesChallenge() {
             </Instructions>
             <Instructions>
                 The todo texts are <strong>not guaranteed to be unique</strong>, so make sure to check all
-                of them regardless of their text.
+                buttons regardless of their text.
             </Instructions>
             <Instructions>
-                Use your automation tool to check all of them at once or one by one. After checking all of them, assert
+                Use your automation tool to check them all at once or one by one. After checking all of them, assert
                 that a success message appears.
             </Instructions>
 
-            <LinearProgress variant="determinate" value={(checkedBoxes / todos.length) * 100} />
+            <LinearProgress variant="determinate" value={(completedTodos / todos.length) * 100} />
 
             <Grid2 container spacing={2}>
                 {
@@ -70,8 +70,8 @@ function ManyBoxesChallenge() {
                     ))
                 }
             </Grid2>
-            <SuccessMessage condition={allBoxesChecked} text="Nice job! You literally checked all the boxes! 📦" />
-            <InfoMessage condition={!allBoxesChecked}>Currently completed {checkedBoxes} out of {todos.length} tasks.</InfoMessage>
+            <SuccessMessage condition={allTodosComplete} text="Nice job! You literally checked all the boxes! 📦" />
+            <InfoMessage condition={!allTodosComplete}>Currently completed {completedTodos} out of {todos.length} tasks.</InfoMessage>
 
         </Challenge>
     );
@@ -79,8 +79,9 @@ function ManyBoxesChallenge() {
 
 
 function CounterChallenge() {
-    const [goal, setGoal] = useState(999);
     const [clicks, setClicks] = useState(0);
+
+    const goal = 999;
     const done = clicks === goal;
 
     return (

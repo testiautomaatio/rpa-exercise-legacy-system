@@ -54,7 +54,7 @@ function BasicInputChallenge() {
 
         <TextField id="greeting" name="greeting" label="Greeting" variant="outlined" value={input} onChange={e => setInput(e.target.value)} />
 
-        <SuccessMessage condition={done} text="Nice job! You've greeted the page 👋! Next, let's do something a bit more tricky." />
+        <SuccessMessage condition={done} text="Nice job! You've greeted the page 👋! Continue with the next challenges below." />
         <InfoMessage condition={!done} text={`Type "${correct}" in the input to pass this challenge.`} />
     </Challenge>;
 }
@@ -146,8 +146,8 @@ function RadioButtonsChallenge() {
                 </RadioGroup>
             </FormControl>
 
-            <SuccessMessage condition={allChecked} text="The term &quot;radio button&quot; in HTML comes from the old-school radio dials that let you choose only one station at a time. 📻🎸🎵" />
-            <InfoMessage condition={!allChecked} text={`Check each radio button at least once to pass this challenge. Currently checked ${checked.length} / ${languages.length}.`} />
+            <SuccessMessage condition={allChecked} text='The term "radio button" in HTML comes from the old-school radio dials that let you choose only one station at a time. 📻🎸🎵' />
+            <InfoMessage condition={!allChecked} text={`Toggle each radio button at least once to pass this challenge. Currently ${checked.length} / ${languages.length} toggled.`} />
         </Challenge>
     );
 }
@@ -216,7 +216,9 @@ function DialogChallenge() {
 
         <Button variant="contained" color="success" onClick={() => setAnswer(prompt(question) ?? "0")}>{question}</Button>
 
-        <SuccessMessage condition={done} text="You've handled the prompt successfully! 🎉 The math part sure is easier than automating the test 😅" />
-        <InfoMessage condition={!done} text={`Your current answer is ${answer}. Make sure to set up your test to insert the correct value.`} />
+        <SuccessMessage condition={done} text="You've handled the prompt successfully! 🎉 The math part sure is easier than automating the test. 😅" />
+        <InfoMessage condition={!done}>
+            Your current answer is {answer}. Make sure to set up your test to insert the correct value.
+        </InfoMessage>
     </Challenge>
 }
