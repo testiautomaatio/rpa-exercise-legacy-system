@@ -54,7 +54,7 @@ function BasicInputChallenge() {
 
         <TextField id="greeting" name="greeting" label="Greeting" variant="outlined" value={input} onChange={e => setInput(e.target.value)} />
 
-        <SuccessMessage condition={done} text="Nice job! You've greeted the page 👋! Next, let's do something a bit more tricy." />
+        <SuccessMessage condition={done} text="Nice job! You've greeted the page 👋! Next, let's do something a bit more tricky." />
         <InfoMessage condition={!done} text={`Type "${correct}" in the input to pass this challenge.`} />
     </Challenge>;
 }
