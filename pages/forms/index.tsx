@@ -177,19 +177,19 @@ function CheckboxChallenge() {
 
             <Stack direction="column" justifyContent="center">
                 <Stack direction="row" alignItems="center">
-                    <Checkbox name="terms-and-conditions" onClick={e => handleClick(e.target)} /> Did not read the terms and conditions
+                    <Checkbox name="terms-and-conditions" onClick={e => handleClick(e.target)} /> I did not read the terms and conditions
                 </Stack>
                 <Stack direction="row" alignItems="center">
-                    <Checkbox className="no-robot" onClick={e => handleClick(e.target)} /> I am not a robot
+                    <Checkbox className="no-robot" onClick={e => handleClick(e.target)} /> I <strong>am not</strong> a robot
                 </Stack>
                 <Stack direction="row" alignItems="center">
-                    <Checkbox id="yes-robot" onClick={e => handleClick(e.target)} /> I am a robot
+                    <Checkbox id="yes-robot" onClick={e => handleClick(e.target)} /> I <strong>am</strong> a robot
                 </Stack>
                 <Stack direction="row" alignItems="center">
                     <Checkbox title="Subscribe to newsletter" onClick={e => handleClick(e.target)} /> I sure want to subscribe to a newsletter
                 </Stack>
                 <Stack direction="row" alignItems="center">
-                    <Checkbox onClick={e => handleClick(e.target)} /> All boxes need to be checked
+                    <Checkbox onClick={e => handleClick(e.target)} /> I have checked all of the boxes
                 </Stack>
             </Stack>
             <SuccessMessage condition={allChecked} text="Button-mashing detected. Are you testing or gaming?! 📦" />
