@@ -18,7 +18,7 @@ export default function DelaysPage() {
         }, 100);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [start]);
 
 
     return <>
