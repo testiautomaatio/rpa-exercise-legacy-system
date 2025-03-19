@@ -1,77 +1,86 @@
-import { Stack, Paper, Button, CircularProgress, TextField } from '@mui/material';
+import Challenge from '@/components/Challenge';
+import SuccessMessage from '@/components/SuccessMessage';
+import theme from '@/theme';
+import { Check } from '@mui/icons-material';
+import { Stack, Button, CircularProgress, TextField } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 
 export default function DelaysPage() {
 
-  const [ticks, setTicks] = useState(0);
+    const start = useMemo(() => Date.now(), []);
+    const [milliseconds, setMilliseconds] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTicks((ticks) => ticks + 1);
-    }, 100);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setMilliseconds(Date.now() - start);
+        }, 100);
 
-    return () => clearInterval(interval);
-  }, []);
-
-  const inputPercentage = Math.min(ticks * 3.33, 100);
-  const inputHidden = ticks < 30;
-
-  const buttonPercentage = Math.min(ticks * 2, 100);
-  const buttonDisabled = ticks < 50;
-
-  return <>
-    <Typography my={1}>
-      Pages can be slow to load for a variety of reasons. This page simulates a slow loading page,
-      where elements appear on the page or become editable after a delay.
-    </Typography>
-    <Typography my={1}>
-      Use your test automation tool to interact with the elements but take into account that the elements
-      might not be immediately available.
-    </Typography >
+        return () => clearInterval(interval);
+    }, []);
 
 
-    <Challenge>
-      <Typography>
-        A text input element will appear below after a delay.
-        Use your automation tool to insert any text into it to pass this challenge.
-      </Typography>
-      <Stack justifyContent="center" alignItems="center" gap={2} direction="row" >
-        <Stack justifyContent="center" alignItems="center" gap={2} direction="row" >
-          <Progress percentage={inputPercentage} />
-          <div style={{ visibility: inputHidden ? 'hidden' : undefined }}>
-            <TextField variant="outlined" />
-          </div>
+    return <>
+        <Typography my={1}>
+            Pages can be slow to load for a variety of reasons. This page simulates a slow loading page,
+            where elements appear on the page or become editable after a delay.
+        </Typography>
+        <Typography my={1}>
+            Use your test automation tool to interact with the elements but take into account that the elements
+            might not be immediately available.
+        </Typography >
+
+        <DelayedAppearanceChallenge milliseconds={milliseconds} />
+        <DelayedEnablementChallenge milliseconds={milliseconds} />
+    </>;
+}
+
+function DelayedAppearanceChallenge({ milliseconds }: { milliseconds: number }) {
+    const [text, setText] = useState('');
+    const DELAY_MS = 3_000;
+    const progressPercentage = Math.min((milliseconds / DELAY_MS), 1) * 100;
+    const showInput = milliseconds > DELAY_MS;
+
+    return <Challenge title="Delayed appearance">
+        <Typography>
+            A text input element will appear below after a delay. Use your automation tool to insert the text <em>Hello world</em> into
+            it once it has appeared. After inserting the text, assert that a correct success message appears.
+        </Typography>
+        <Stack justifyContent="center" alignItems="center" gap={2} direction="row" sx={{ minHeight: theme.spacing(10) }} >
+            <Progress percentage={progressPercentage} />
+
+            {showInput && <TextField variant="outlined" label="Enter the text" value={text} onChange={e => setText(e.target.value)} />}
         </Stack>
-      </Stack>
+        <SuccessMessage condition={showInput && text.toLowerCase().includes("hello world")} text="Nice job! Hello to you too! 👋" />
     </Challenge>
+}
 
 
-    <Challenge>
-      <Typography>
-        The following button is on the page from the start, but will become enabled after
-        a delay. Use your automation tool to click it to pass this challenge.
-        After clicking, assert that a success message appears.
-      </Typography>
-      <Stack justifyContent="center" alignItems="center" gap={2} direction="row" >
-        <Progress percentage={buttonPercentage} />
-        <Button variant="contained" disabled={buttonDisabled}>Click me!</Button>
-      </Stack>
+function DelayedEnablementChallenge({ milliseconds }: { milliseconds: number }) {
+    const [done, setDone] = useState(false);
+
+    const DELAY_MS = 5_000;
+    const buttonPercentage = Math.min(milliseconds / DELAY_MS, 1) * 100;
+    const enabled = milliseconds >= DELAY_MS;
+
+    return <Challenge title="Delayed enablement">
+        <Typography>
+            The following button is on the page from the start, but will become enabled after
+            a delay. Use your automation tool to click it to pass this challenge.
+            After clicking, assert that a success message appears.
+        </Typography>
+        <Stack justifyContent="center" alignItems="center" gap={2} direction="row" >
+            <Progress percentage={buttonPercentage} />
+            <Button variant="contained" disabled={!enabled} onClick={() => setDone(true)}>Click me!</Button>
+        </Stack>
+        <SuccessMessage condition={enabled && done} text="Thoughtful clicking? You must be a real tester!" />
     </Challenge>
-  </>;
 }
 
 function Progress({ percentage }: { percentage: number }) {
-  return <CircularProgress value={percentage} variant="determinate" size="20px" />
-}
-
-function Challenge({ children }: { children: React.ReactNode }) {
-  return <Stack gap={2} mt={2}>
-    <Paper elevation={2}>
-      <Stack gap={2} p={2} alignItems="flex-start">
-        {children}
-      </Stack>
-    </Paper>
-  </Stack>;
+    if (percentage >= 100) {
+        return <Check color="success" />
+    }
+    return <CircularProgress size="20px" />
 }

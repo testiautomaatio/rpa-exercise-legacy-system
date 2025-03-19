@@ -1,56 +1,45 @@
-import { Stack, Paper, Alert } from '@mui/material';
+import Challenge, { Instructions } from '@/components/Challenge';
+import SuccessMessage from '@/components/SuccessMessage';
+import { Stack } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
 
 
 export default function DatetimePage() {
 
-  const [date, setDate] = useState(new Date());
-  const year = date.getFullYear();
+    const [year, setYear] = useState(0);
+    const done = year === 2033;
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDate(new Date());
-    }, 1000);
+    useEffect(() => {
+        const update = () => setYear(new Date().getFullYear());
+        const interval = setInterval(update, 100);
+        update();
 
-    return () => clearInterval(interval);
-  }, []);
+        return () => clearInterval(interval);
+    }, []);
 
 
-  return <>
-    <Typography my={1}>
-      Not many things look as outdated as websites (or course material) with past dates in them.
-    </Typography>
-    <Typography my={1}>
-      This page has a dynamically changing element that displays the current year.
-      Use your automation tool to verify that the copyright notice updates dynamically based
-      on the browser&apos;s time. Set the time to year 2033 and verify that the year is displayed correctly.
-    </Typography>
+    return <>
+        <Instructions>
+            Many sites depend on the current date and time to display relevant information. This can include
+            things like news articles, event calendars and booking systems. This page has a dynamically changing
+            element that displays the current year. Right now, your browser's time is set to year {year}.
+        </Instructions>
 
-    <Stack gap={2} mt={2}>
-      <Challenge>
-        <Typography alignSelf="center">
-          Copyright &copy; {year} Acme Corp.
-        </Typography>
-      </Challenge>
-      {
-        year === 2033 ?
-          <Alert severity="success" variant="filled">
-            You successfully set the date to 2033!
-          </Alert>
-          :
-          <Alert severity="warning" variant="outlined">
-            Your system time is set to year {year}. Set the date to 2033 in your automation tool to pass this challenge.
-          </Alert>
-      }
-    </Stack>
-  </>;
-}
 
-function Challenge({ children }: { children: React.ReactNode }) {
-  return <Paper elevation={2}>
-    <Stack gap={2} p={2} alignItems="flex-start">
-      {children}
-    </Stack>
-  </Paper>;
+        <Stack gap={2}>
+            <Challenge title="Test page using different dates">
+                <Instructions>
+                    Use your automation tool to verify that the copyright notice below updates dynamically based on the browser's
+                    time. <strong>Set the time to year 2033</strong> and assert that the copyright notice is displayed correctly.
+                </Instructions>
+
+                <Typography alignSelf="center">
+                    Copyright &copy; {year} example.com
+                </Typography>
+            </Challenge>
+
+            <SuccessMessage condition={done} text="Time travel can be easy with the right tools!" />
+        </Stack>
+    </>;
 }

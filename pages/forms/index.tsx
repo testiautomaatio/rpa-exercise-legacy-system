@@ -1,130 +1,250 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Check } from '@mui/icons-material';
-import { TextField, Stack, Paper, Checkbox, Box, RadioGroup, Radio, FormControlLabel, FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material';
+import Challenge, { Instructions } from '@/components/Challenge';
+import SuccessMessage from '@/components/SuccessMessage';
+import { TextField, Stack, Checkbox, RadioGroup, Radio, FormControlLabel, FormControl, InputLabel, Select, MenuItem, Button, FormLabel } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 export default function FormsPage() {
 
-  const [firstname, setFirstname] = useState('');
-  const [lastname, setLastname] = useState('');
-
-  return <>
-    <Typography my={1}>
-      On this page, you can exercise interacting with different types of form elements.
-    </Typography>
-    <Typography my={1}>
-      Each element has a different set of attributes, such as id, name or label, and different accessibility features such as { }
-      <Link href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/WAI-ARIA_basics">aria attributes</Link>.
-      Use your automation tool to interact with the elements and assert that you receive success messages after completing each challenge.
-    </Typography>
-
-    <Stack gap={2} mt={2}>
-      <Challenge>
-        <Typography>
-          The following input has an id and a name that can be used to reference it in automated tests.
-          Fill in the input with any name to mark it as completed:
+    return <>
+        <Typography my={1}>
+            On this page, you can exercise interacting with different types of form elements.
+        </Typography>
+        <Typography my={1}>
+            Each element has a different set of attributes, such as id, name or label, and different accessibility features such as { }
+            <Link href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/WAI-ARIA_basics">aria attributes</Link>.
+            Use your automation tool to interact with the elements and assert that you receive success messages after completing each challenge.
         </Typography>
 
-        <Stack gap={2} direction="row" alignItems="center">
-          <TextField id="firstname" name="firstname" label="First name" variant="outlined" value={firstname} onChange={e => setFirstname(e.target.value)} />
+        <Stack gap={2} mt={2}>
+            <BasicInputChallenge />
 
-          {firstname && <Check color="success" />}
+            <InputWithoutAttributesChallenge />
+
+            <ReadingValuesChallenge />
+
+            <RadioButtonsChallenge />
+
+            <CheckboxChallenge />
+
+            <SelectChallenge />
+
+            <DialogChallenge />
+        </Stack >
+    </>;
+}
+
+
+function BasicInputChallenge() {
+    const [input, setInput] = useState('');
+    const done = input.toLowerCase() === "hello";
+
+    return <Challenge title="Basic input">
+        <Instructions>
+            In this challenge, you will need to locate an input element and insert a specific value into it.
+        </Instructions>
+        <Instructions>
+            The following input has several attributes that can be used to reference it in automated tests.
+            Try writing "Hello" in the input and see the message that appears. Then, repeat the same
+            in your automation tool and verify that you get the same message.
+        </Instructions>
+
+        <TextField id="greeting" name="greeting" label="Greeting" variant="outlined" value={input} onChange={e => setInput(e.target.value)} placeholder="Type &quot;hello&quot;" />
+
+        <SuccessMessage condition={done} text="Nice job! You've greeted the page 👋! Next, let's do something a bit more tricy." />
+    </Challenge>;
+}
+
+function InputWithoutAttributesChallenge() {
+    const [input, setInput] = useState('');
+    const msg = "undefined is not a function";
+
+    const done = input.toLowerCase().includes(msg);
+
+    return <Challenge title="Input without proper attributes">
+        <Instructions>
+            The following input has no id or name, so selecting it in an automated test can be more difficult.
+            Fill in the text <em>"{msg}"</em> in the input field to see a success message. Then,
+            repeat the same in your automation tool and verify that you get the same message.
+        </Instructions>
+        <Stack direction="column" alignItems="flex-start">
+            <Typography component="label" variant="body2">Type "{msg}" below:</Typography>
+            <TextField variant="outlined" value={input} onChange={e => setInput(e.target.value)} />
         </Stack>
+        <SuccessMessage condition={done} text="Careful, that phrase alone has crashed entire applications." />
+    </Challenge>
+}
 
-      </Challenge>
-      <Challenge>
-        <Typography>
-          The following input has no id or name, so selecting it in an automated test can be more difficult.
-          Fill in the input with any name to mark it as completed:
-        </Typography>
-        <Box>
-          <Typography component="label" variant="body2">Last name:</Typography>
-          <Stack gap={2} direction="row" alignItems="center">
-            <TextField variant="outlined" value={lastname} onChange={e => setLastname(e.target.value)} />
-            {lastname && <Check color="success" />}
-          </Stack>
-        </Box>
-      </Challenge>
-      <Challenge>
-        <Typography>
-          Radio buttons are similar to checkboxes, but only one can be selected at a time.
-          Use your test automation tool to toggle each of the following radio buttons one by one to pass
-          this challenge:
-        </Typography>
+function ReadingValuesChallenge() {
+    const [dynamicValue, setDynamicValue] = useState("");
+    const [text, setText] = useState("");
 
-        <Stack direction="row" justifyContent="center">
-          <RadioGroup name="framework">
-            {RadioWithLabel("Java", "java")}
-            {RadioWithLabel("JavaScript", "javascript")}
-            {RadioWithLabel("TypeScript", "typescript")}
-            {RadioWithLabel("Python", "python")}
-          </RadioGroup>
-        </Stack>
-      </Challenge >
-      <Challenge>
-        <Typography>
-          Similarly, there can be checkboxes that need to be selected in automated tests.
-          Each of the following checkboxes have different attributes that can be used to reference them.
-          Use your automation tool to check each of them one by one to pass this challenge:
-        </Typography>
+    const done = dynamicValue.length > 0 && text === dynamicValue;
 
-        <Stack direction="row" justifyContent="center">
-          <Box><Checkbox name="checkbox-with-a-name" /></Box>
-          <Box><Checkbox id="checkbox-with-an-id" /></Box>
-          <Box><Checkbox className="checkbox-with-class" /></Box>
-          <Box><Checkbox title="Checkbox with a title!" /></Box>
-          <Box><Checkbox /></Box>
-        </Stack>
-      </Challenge>
+    useEffect(() => {
+        setDynamicValue(Math.random().toString(36).substring(2));
+    }, []);
 
-      <Challenge>
-        <Typography>
-          Selecting a value from a <code>select</code> element can be a bit different.
-          Use your automation tool to select the <em>blue</em> option from the following
-          dropdown to pass this challenge. Take note that you will likely need to use your
-          browses&apos;s developer tools to inspect the element and find the correct value.
-        </Typography>
+    return (
+        <Challenge title="Reading values from the page">
+            <Instructions>
+                Often, you need to read the value a dynamic value of an element and use it in your tests.
+                Use your automation tool to read the from the following <code>span</code> element and insert it into the
+                input field. After inserting the value, assert that a success message appears.
+            </Instructions>
+            <Instructions>
+                The value will change each
+                time you reload the page so make sure to read it from the page and not hardcode it.
+            </Instructions>
+            <Instructions>
+                The value to enter is <strong id="dynamic-value">{dynamicValue}</strong>
+            </Instructions>
+            <Stack gap={2} direction="row" alignItems="center">
+                <TextField id="dynamic-input" label="Insert the value here" variant="outlined" value={text} onChange={e => setText(e.target.value)} />
+            </Stack>
+            <SuccessMessage condition={done} text="Great job! You've read a value from the page! 🎉" />
+        </Challenge>
+    );
+}
+
+function RadioButtonsChallenge() {
+    type Language = keyof typeof items;
+
+    const [items, setItems] = useState({
+        "Java": false,
+        "JavaScript": false,
+        "TypeScript": false,
+        "Python": false
+    });
+
+    const languages = Object.keys(items) as Language[];
+    const checked = Object.entries(items).filter(([key, checked]) => checked).map(([langName]) => langName);
+    const allChecked = Object.values(items).every(Boolean);
+
+    function RadioWithLabel(language: Language) {
+        return <FormControlLabel control={<Radio />} label={language} value={language} />;
+    }
+
+    return (
+        <Challenge title="Radio buttons">
+            <Instructions>
+                Radio buttons are similar to checkboxes, but only one can be selected at a time.
+                Use your test automation tool to toggle each of the following radio buttons at least once to pass
+                this challenge:
+            </Instructions>
+
+            <FormControl>
+                <FormLabel>Programming languages ({checked.length} / {languages.length} toggled)</FormLabel>
+                <RadioGroup name="selected-language" onChange={e => setItems({ ...items, [e.target.value as Language]: true })}>
+                    {languages.map(lang => RadioWithLabel(lang))}
+                </RadioGroup>
+            </FormControl>
+
+            <SuccessMessage condition={allChecked} text="The term &quot;radio button&quot; in HTML comes from the old-school radio dials that let you choose only one station at a time. 📻🎸🎵" />
+        </Challenge>
+    );
+}
+
+function CheckboxChallenge() {
+    const [checked, setChecked] = useState(0);
+    const allChecked = checked === 5;
+
+    function handleClick(target: EventTarget) {
+        const element = target as HTMLInputElement;
+        setChecked(c => element.checked ? c + 1 : c - 1);
+    }
+
+    return (
+        <Challenge title="Checkboxes">
+            <Instructions>
+                Similarly, there can be checkboxes that need to be selected in automated tests.
+                Each of the following checkboxes have different attributes that can be used to reference them.
+                Unlike previous examples, these buttons may not be very accessible.
+            </Instructions>
+            <Instructions>
+                Use your automation tool to check each of the buttons one by one and assert the success message
+                to pass this challenge:
+            </Instructions>
+
+            <Stack direction="column" justifyContent="center">
+                <Stack direction="row" alignItems="center">
+                    <Checkbox name="terms-and-conditions" onClick={e => handleClick(e.target)} /> Did not read the terms and conditions
+                </Stack>
+                <Stack direction="row" alignItems="center">
+                    <Checkbox className="no-robot" onClick={e => handleClick(e.target)} /> I am not a robot
+                </Stack>
+                <Stack direction="row" alignItems="center">
+                    <Checkbox id="yes-robot" onClick={e => handleClick(e.target)} /> I am a robot
+                </Stack>
+                <Stack direction="row" alignItems="center">
+                    <Checkbox title="Subscribe to newsletter" onClick={e => handleClick(e.target)} /> I sure want to subscribe a newsletter
+                </Stack>
+                <Stack direction="row" alignItems="center">
+                    <Checkbox onClick={e => handleClick(e.target)} /> All boxes need to be checked
+                </Stack>
+            </Stack>
+            <SuccessMessage condition={allChecked} text="Button-mashing detected. Are you testing or gaming?! 📦" />
+        </Challenge>
+    );
+}
+
+function SelectChallenge() {
+    const colors = {
+        "ffffff": "White",
+        "000000": "Black",
+        "ff0000": "Red",
+        "00ff00": "Green",
+        "0000ff": "Blue"
+    };
+
+    const [color, setColor] = useState<keyof typeof colors | "">("");
+    const done = color === "0000ff";
+
+    return <Challenge title="Select element">
+        <Instructions>
+            Selecting a value from a <code>select</code> element can be a bit different.
+            Use your automation tool to select the <em>blue</em> option from the following
+            dropdown to pass this challenge. Take note that you will likely need to use your
+            browser's developer tools to inspect the element and find the correct value.
+        </Instructions>
 
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Choose a color:</InputLabel>
-          <Select
-            id="select-color"
-            label="color">
-            <MenuItem value="ffffff">White</MenuItem>
-            <MenuItem value="000000">Black</MenuItem>
-            <MenuItem value="ff0000">Red</MenuItem>
-            <MenuItem value="00ff00">Green</MenuItem>
-            <MenuItem value="0000ff">Blue</MenuItem>
-          </Select>
+            <InputLabel id="demo-simple-select-label">Choose a color:</InputLabel>
+            <Select
+                id="select-color"
+                label="color"
+                value={color}
+                onChange={e => setColor(e.target.value as keyof typeof colors)}>
+                {Object.entries(colors).map(([hexCode, name]) => <MenuItem key={hexCode} value={hexCode}>{name}</MenuItem>)}
+            </Select>
         </FormControl>
-      </Challenge >
-
-      <Challenge>
-        <Typography>
-          The following buttons trigger the browsers <em>alert</em> and <em>prompt</em> dialogs.
-          Use your automation tool to click each of them and handle the dialogs to pass this challenge.
-          After closing the dialogs, assert that a success message appears.
-        </Typography>
-        <Stack justifyContent="center" alignItems="center" gap={2} direction="row" >
-          <Button variant="contained" color="success" onClick={() => alert("Now close this alert")}>Open alert</Button>
-          <Button variant="contained" color="success" onClick={() => prompt("What is 1 + 1?")}> Open confirm</Button>
-        </Stack>
-      </Challenge >
-    </Stack >
-  </>;
+        <SuccessMessage condition={done} text="You've selected the color blue! 💙" />
+    </Challenge>;
 }
 
-function RadioWithLabel(label: string, value: string) {
-  return <FormControlLabel control={<Radio />} label={label} value={value} />;
-}
+function DialogChallenge() {
+    const [answer, setAnswer] = useState("0");
 
-function Challenge({ children }: { children: React.ReactNode }) {
-  return <Paper elevation={2}>
-    <Stack gap={2} p={2} alignItems="flex-start">
-      {children}
-    </Stack>
-  </Paper>;
+    const question = "What is 1 + 1?"
+    const done = answer === "2";
+
+    return <Challenge title="Alerts and prompts">
+        <Instructions>
+            The following button will trigger the browser's <em>prompt</em> dialog, that will expect user input.
+            Try it first manually, and then use your automation tool to handle the dialog and pass this challenge.
+            After handling the prompt, assert that the correct success message appears.
+        </Instructions>
+        <Instructions>
+            The question and the correct answer will stay the same, so you can hardcode the answer in your tests.
+        </Instructions>
+
+        <Button variant="contained" color="success" onClick={() => setAnswer(prompt(question) ?? "0")}>{question}</Button>
+
+        <Typography>Your current answer is {answer}.</Typography>
+
+        <SuccessMessage condition={done} text="You've handled the prompt successfully! 🎉" />
+    </Challenge>
 }
