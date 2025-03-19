@@ -10,7 +10,7 @@ import type { Navigation } from '@toolpad/core/AppProvider';
 
 
 import theme from '../theme';
-import { AspectRatio, AvTimer, DynamicForm, Home, Loop, ManageHistory } from '@mui/icons-material';
+import { AspectRatio, AvTimer, DynamicForm, Home, Loop, ManageHistory, Palette } from '@mui/icons-material';
 import { Stack, Typography } from '@mui/material';
 import Link from 'next/link';
 
@@ -37,6 +37,11 @@ const NAVIGATION: Navigation = [
         segment: 'forms',
         title: 'Form elements',
         icon: <DynamicForm />,
+    },
+    {
+        segment: 'customisations',
+        title: 'Custom components',
+        icon: <Palette />,
     },
     {
         segment: 'repetition',

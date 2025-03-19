@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 
 import Challenge, { Instructions } from '@/components/Challenge';
-import SuccessMessage from '@/components/SuccessMessage';
+import { InfoMessage, SuccessMessage } from '@/components/messages';
 import { generateTodoList, TodoType } from '@/utils/TodoGenerator';
 import { Stack, Button, FormControlLabel, Checkbox, Grid2, LinearProgress } from '@mui/material';
 import Typography from '@mui/material/Typography';
@@ -42,19 +42,19 @@ function ManyBoxesChallenge() {
     }
 
     return (
-        <Challenge title="Check all the boxes">
+        <Challenge title="Mark todos as completed">
             <Instructions>
                 All of the following {todos.length} tasks need to be marked as completed to pass this challenge.
-                The number of tasks and checkboxes and their initial states vary, so make sure to check all of them
-                and not uncheck any 🙃. The todo texts are not guaranteed to beunique, so make sure to check all
+                The <strong>number of tasks and checkboxes and their initial states vary</strong> on each visit, so make sure to check
+                all of them and not uncheck any 🙃.
+            </Instructions>
+            <Instructions>
+                The todo texts are <strong>not guaranteed to be unique</strong>, so make sure to check all
                 of them regardless of their text.
             </Instructions>
             <Instructions>
                 Use your automation tool to check all of them at once or one by one. After checking all of them, assert
                 that a success message appears.
-            </Instructions>
-            <Instructions>
-                Currently completed {checkedBoxes} out of {todos.length} tasks.
             </Instructions>
 
             <LinearProgress variant="determinate" value={(checkedBoxes / todos.length) * 100} />
@@ -71,6 +71,8 @@ function ManyBoxesChallenge() {
                 }
             </Grid2>
             <SuccessMessage condition={allBoxesChecked} text="Nice job! You literally checked all the boxes! 📦" />
+            <InfoMessage condition={!allBoxesChecked}>Currently completed {checkedBoxes} out of {todos.length} tasks.</InfoMessage>
+
         </Challenge>
     );
 }
@@ -81,22 +83,21 @@ function CounterChallenge() {
     const [clicks, setClicks] = useState(0);
     const done = clicks === goal;
 
-    useEffect(() => {
-        setGoal(900 + Math.ceil(Math.random() * 100));
-    }, []);
-
     return (
         <Challenge title="Counter">
             <Typography>
                 The following counter is a typical example of a frontend component. Use the buttons to increase
-                the counter to <strong>{goal}</strong>. After reaching the goal, assert that a success message appears.
+                the counter to <strong>{goal}</strong>. After reaching the goal, assert that the counter contains
+                the expected number of clicks.
             </Typography>
             <Stack gap={2} direction="row" alignSelf="center" alignItems="center">
                 <Button variant="contained" color="primary" onClick={e => setClicks(c => c - 1)}>-</Button>
-                <Typography>Clicks: {clicks} / {goal}</Typography>
+                <Typography>Counter: {clicks} / {goal}</Typography>
                 <Button variant="contained" color="primary" onClick={e => setClicks(c => c + 1)}>+</Button>
             </Stack>
-            <SuccessMessage condition={done} text="If you keep clicking, I might start charging per press." />
+
+            <SuccessMessage condition={done} text="If you keep clicking, I might start charging per press 💰." />
+            <InfoMessage condition={!done}>Click until you reach {goal}!</InfoMessage>
         </Challenge>
     );
 }

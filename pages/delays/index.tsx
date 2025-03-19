@@ -1,5 +1,5 @@
 import Challenge from '@/components/Challenge';
-import SuccessMessage from '@/components/SuccessMessage';
+import { InfoMessage, SuccessMessage } from '@/components/messages';
 import theme from '@/theme';
 import { Check } from '@mui/icons-material';
 import { Stack, Button, CircularProgress, TextField } from '@mui/material';
@@ -38,9 +38,13 @@ export default function DelaysPage() {
 
 function DelayedAppearanceChallenge({ milliseconds }: { milliseconds: number }) {
     const [text, setText] = useState('');
+
     const DELAY_MS = 3_000;
     const progressPercentage = Math.min((milliseconds / DELAY_MS), 1) * 100;
     const showInput = milliseconds > DELAY_MS;
+    const expectedGreeting = "hello world";
+
+    const done = showInput && text.toLowerCase().includes(expectedGreeting);
 
     return <Challenge title="Delayed appearance">
         <Typography>
@@ -52,7 +56,9 @@ function DelayedAppearanceChallenge({ milliseconds }: { milliseconds: number }) 
 
             {showInput && <TextField variant="outlined" label="Enter the text" value={text} onChange={e => setText(e.target.value)} />}
         </Stack>
-        <SuccessMessage condition={showInput && text.toLowerCase().includes("hello world")} text="Nice job! Hello to you too! 👋" />
+
+        <SuccessMessage condition={done} text="Nice job! Hello to you too! 👋" />
+        <InfoMessage condition={!done}>Wait until the input appears, and then type "{expectedGreeting}" into it.</InfoMessage>
     </Challenge>
 }
 
@@ -75,6 +81,7 @@ function DelayedEnablementChallenge({ milliseconds }: { milliseconds: number }) 
             <Button variant="contained" disabled={!enabled} onClick={() => setDone(true)}>Click me!</Button>
         </Stack>
         <SuccessMessage condition={enabled && done} text="Thoughtful clicking? You must be a real tester!" />
+        <InfoMessage condition={!done} text="Wait until the button becomes enabled, and then click it like you mean it." />
     </Challenge>
 }
 

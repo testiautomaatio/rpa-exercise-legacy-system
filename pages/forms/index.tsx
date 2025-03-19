@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import Challenge, { Instructions } from '@/components/Challenge';
-import SuccessMessage from '@/components/SuccessMessage';
-import { TextField, Stack, Checkbox, RadioGroup, Radio, FormControlLabel, FormControl, InputLabel, Select, MenuItem, Button, FormLabel } from '@mui/material';
+import { InfoMessage, SuccessMessage } from '@/components/messages';
+import { TextField, Stack, Checkbox, RadioGroup, Radio, FormControlLabel, FormControl, Button, FormLabel } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -30,8 +30,6 @@ export default function FormsPage() {
 
             <CheckboxChallenge />
 
-            <SelectChallenge />
-
             <DialogChallenge />
         </Stack >
     </>;
@@ -40,7 +38,9 @@ export default function FormsPage() {
 
 function BasicInputChallenge() {
     const [input, setInput] = useState('');
-    const done = input.toLowerCase() === "hello";
+
+    const correct = "hello";
+    const done = input.toLowerCase() === correct;
 
     return <Challenge title="Basic input">
         <Instructions>
@@ -52,9 +52,10 @@ function BasicInputChallenge() {
             in your automation tool and verify that you get the same message.
         </Instructions>
 
-        <TextField id="greeting" name="greeting" label="Greeting" variant="outlined" value={input} onChange={e => setInput(e.target.value)} placeholder="Type &quot;hello&quot;" />
+        <TextField id="greeting" name="greeting" label="Greeting" variant="outlined" value={input} onChange={e => setInput(e.target.value)} />
 
         <SuccessMessage condition={done} text="Nice job! You've greeted the page 👋! Next, let's do something a bit more tricy." />
+        <InfoMessage condition={!done} text={`Type "${correct}" in the input to pass this challenge.`} />
     </Challenge>;
 }
 
@@ -74,7 +75,8 @@ function InputWithoutAttributesChallenge() {
             <Typography component="label" variant="body2">Type "{msg}" below:</Typography>
             <TextField variant="outlined" value={input} onChange={e => setInput(e.target.value)} />
         </Stack>
-        <SuccessMessage condition={done} text="Careful, that phrase alone has crashed entire applications." />
+        <SuccessMessage condition={done} text="Done! But be careful, that phrase alone has crashed entire applications." />
+        <InfoMessage condition={!done} text={`Type "${msg}" in the input to pass this challenge.`} />
     </Challenge>
 }
 
@@ -105,7 +107,8 @@ function ReadingValuesChallenge() {
             <Stack gap={2} direction="row" alignItems="center">
                 <TextField id="dynamic-input" label="Insert the value here" variant="outlined" value={text} onChange={e => setText(e.target.value)} />
             </Stack>
-            <SuccessMessage condition={done} text="Great job! You've read a value from the page! 🎉" />
+            <SuccessMessage condition={done} text="Great job! You've successfully read a value from the page! 🎉" />
+            <InfoMessage condition={!done} text="Read the value above and write it into the input to pass this challenge." />
         </Challenge>
     );
 }
@@ -125,7 +128,7 @@ function RadioButtonsChallenge() {
     const allChecked = Object.values(items).every(Boolean);
 
     function RadioWithLabel(language: Language) {
-        return <FormControlLabel control={<Radio />} label={language} value={language} />;
+        return <FormControlLabel control={<Radio />} label={language} value={language} key={language} />;
     }
 
     return (
@@ -137,20 +140,23 @@ function RadioButtonsChallenge() {
             </Instructions>
 
             <FormControl>
-                <FormLabel>Programming languages ({checked.length} / {languages.length} toggled)</FormLabel>
+                <FormLabel>Programming languages</FormLabel>
                 <RadioGroup name="selected-language" onChange={e => setItems({ ...items, [e.target.value as Language]: true })}>
                     {languages.map(lang => RadioWithLabel(lang))}
                 </RadioGroup>
             </FormControl>
 
             <SuccessMessage condition={allChecked} text="The term &quot;radio button&quot; in HTML comes from the old-school radio dials that let you choose only one station at a time. 📻🎸🎵" />
+            <InfoMessage condition={!allChecked} text={`Check each radio button at least once to pass this challenge. Currently checked ${checked.length} / ${languages.length}.`} />
         </Challenge>
     );
 }
 
 function CheckboxChallenge() {
     const [checked, setChecked] = useState(0);
-    const allChecked = checked === 5;
+
+    const count = 5;
+    const allChecked = checked === count;
 
     function handleClick(target: EventTarget) {
         const element = target as HTMLInputElement;
@@ -187,42 +193,9 @@ function CheckboxChallenge() {
                 </Stack>
             </Stack>
             <SuccessMessage condition={allChecked} text="Button-mashing detected. Are you testing or gaming?! 📦" />
+            <InfoMessage condition={!allChecked} text={`Check each checkbox to pass this challenge. Currently checked ${checked} / ${count}.`} />
         </Challenge>
     );
-}
-
-function SelectChallenge() {
-    const colors = {
-        "ffffff": "White",
-        "000000": "Black",
-        "ff0000": "Red",
-        "00ff00": "Green",
-        "0000ff": "Blue"
-    };
-
-    const [color, setColor] = useState<keyof typeof colors | "">("");
-    const done = color === "0000ff";
-
-    return <Challenge title="Select element">
-        <Instructions>
-            Selecting a value from a <code>select</code> element can be a bit different.
-            Use your automation tool to select the <em>blue</em> option from the following
-            dropdown to pass this challenge. Take note that you will likely need to use your
-            browser's developer tools to inspect the element and find the correct value.
-        </Instructions>
-
-        <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Choose a color:</InputLabel>
-            <Select
-                id="select-color"
-                label="color"
-                value={color}
-                onChange={e => setColor(e.target.value as keyof typeof colors)}>
-                {Object.entries(colors).map(([hexCode, name]) => <MenuItem key={hexCode} value={hexCode}>{name}</MenuItem>)}
-            </Select>
-        </FormControl>
-        <SuccessMessage condition={done} text="You've selected the color blue! 💙" />
-    </Challenge>;
 }
 
 function DialogChallenge() {
@@ -243,8 +216,7 @@ function DialogChallenge() {
 
         <Button variant="contained" color="success" onClick={() => setAnswer(prompt(question) ?? "0")}>{question}</Button>
 
-        <Typography>Your current answer is {answer}.</Typography>
-
-        <SuccessMessage condition={done} text="You've handled the prompt successfully! 🎉" />
+        <SuccessMessage condition={done} text="You've handled the prompt successfully! 🎉 The math part sure is easier than automating the test 😅" />
+        <InfoMessage condition={!done} text={`Your current answer is ${answer}. Make sure to set up your test to insert the correct value.`} />
     </Challenge>
 }

@@ -1,23 +1,15 @@
 
-# Create Toolpad App
+# Test automation playground
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-toolpad-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Setup
+On this site, you can practice interacting with different types of elements. Each page has a set of challenges that you can complete using your test automation tool. The challenges are designed to help you practice interacting with different types of elements and to help you learn how to write automated tests.
 
-Run `npx auth secret` to generate a secret and replace the value in the .env.local file with it.
+The challenges are designed to be compatible with any test automation tool that can interact with web pages. The challenges also aim to resemble real-world scenarios that you might encounter when writing automated tests for web applications, such as interacting with forms, tables, and responsive web pages.
 
-Add the CLIENT_ID and CLIENT_SECRET from your OAuth provider to the .env.local file.
 
 ## Getting Started
 
 First, run the development server: `npm run dev`
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
