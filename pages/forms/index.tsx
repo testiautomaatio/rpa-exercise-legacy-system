@@ -186,7 +186,7 @@ function CheckboxChallenge() {
                     <Checkbox id="yes-robot" onClick={e => handleClick(e.target)} /> I am a robot
                 </Stack>
                 <Stack direction="row" alignItems="center">
-                    <Checkbox title="Subscribe to newsletter" onClick={e => handleClick(e.target)} /> I sure want to subscribe a newsletter
+                    <Checkbox title="Subscribe to newsletter" onClick={e => handleClick(e.target)} /> I sure want to subscribe to a newsletter
                 </Stack>
                 <Stack direction="row" alignItems="center">
                     <Checkbox onClick={e => handleClick(e.target)} /> All boxes need to be checked

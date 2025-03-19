@@ -58,16 +58,16 @@ export default function ResponsivePage() {
 
             <Paper sx={{ p: 2, my: 2, alignSelf: "stretch" }}>
                 <ChooseSize xs>
-                    XS: Welcome to the world of cramped UI! Everything's cute at this size... except overflowing text.
+                    XS 🐁: Welcome to the world of cramped UI! Everything's cute at this size... except overflowing text.
                 </ChooseSize>
                 <ChooseSize sm>
-                    SM: Small but mighty... until the navbar breaks!
+                    SM 🐕: Small but mighty... until the navbar breaks!
                 </ChooseSize>
                 <ChooseSize md>
-                    MD: This is the viewport devs test first... and sometimes last.
+                    MD 🐎: This is the viewport devs test first... and sometimes last.
                 </ChooseSize>
                 <ChooseSize lg>
-                    LG: Welcome to the land of white space and giant modals!
+                    LG 🐘: Welcome to the land of white space and giant modals!
                 </ChooseSize>
             </Paper>
 
