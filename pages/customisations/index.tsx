@@ -134,7 +134,7 @@ function MuiSelectChallenge() {
                 sx={{ backgroundColor: color ? colors[color] : 'white', aspectRatio: 1, boxShadow: "0 0 1px silver", borderRadius: "50%", flexGrow: 0, flexShrink: 0 }}
             />
         </Stack>
-        <SuccessMessage condition={done} text="Success! You've selected the correct color using a custom select element! 💙" />
+        <SuccessMessage condition={done} text="Success! You have selected the correct color using a custom select element! 💙" />
         <InfoMessage condition={!done} text={`Choose the color ${correct} to pass this challenge.`} />
     </Challenge>;
 }
@@ -158,7 +158,7 @@ function StandardDatePickerChallenge() {
             style={{ padding: "1rem" }}
             onChange={e => setDate(e.target.value)}
         />
-        <SuccessMessage condition={done} text="Success! You've selected the correct date using a standard date picker!" />
+        <SuccessMessage condition={done} text="Success! You have selected the correct date using a standard date picker!" />
         <InfoMessage condition={!done} text={`Select ${formatDate(correct)} to pass this challenge.`} />
     </Challenge>;
 }
@@ -181,7 +181,7 @@ function MuiDatePickerChallenge() {
 
         <DatePicker label="Choose a date" onChange={setDate} value={date} />
 
-        <SuccessMessage condition={done} text="Success! You've selected the correct date using a custom date picker!" />
+        <SuccessMessage condition={done} text="Success! You have selected the correct date using a custom date picker!" />
         <InfoMessage condition={!done} text={`Select ${formatDate(correctDate)} to pass this challenge.`} />
     </Challenge>;
 }

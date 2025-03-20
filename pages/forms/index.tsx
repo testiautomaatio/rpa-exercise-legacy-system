@@ -42,7 +42,7 @@ function BasicInputChallenge() {
     const correct = "hello";
     const done = input.toLowerCase() === correct;
 
-    return <Challenge title="Basic input">
+    return <Challenge title="Basic text input">
         <Instructions>
             In this challenge, you will need to locate an input element and insert a specific value into it.
         </Instructions>
@@ -54,7 +54,7 @@ function BasicInputChallenge() {
 
         <TextField id="greeting" name="greeting" label="Greeting" variant="outlined" value={input} onChange={e => setInput(e.target.value)} />
 
-        <SuccessMessage condition={done} text="Nice job! You've greeted the page 👋! Continue with the next challenges below." />
+        <SuccessMessage condition={done} text="Nice job! You have greeted the page 👋! Continue with the next challenges below." />
         <InfoMessage condition={!done} text={`Type "${correct}" in the input to pass this challenge.`} />
     </Challenge>;
 }
@@ -107,7 +107,7 @@ function ReadingValuesChallenge() {
             <Stack gap={2} direction="row" alignItems="center">
                 <TextField id="dynamic-input" label="Insert the value here" variant="outlined" value={text} onChange={e => setText(e.target.value)} />
             </Stack>
-            <SuccessMessage condition={done} text="Great job! You've successfully read a value from the page! 🎉" />
+            <SuccessMessage condition={done} text="Great job! You have successfully read a value from the page! 🎉" />
             <InfoMessage condition={!done} text="Read the value above and write it into the input to pass this challenge." />
         </Challenge>
     );
@@ -216,7 +216,7 @@ function DialogChallenge() {
 
         <Button variant="contained" color="success" onClick={() => setAnswer(prompt(question) ?? "0")}>{question}</Button>
 
-        <SuccessMessage condition={done} text="You've handled the prompt successfully! 🎉 The math part sure is easier than automating the test. 😅" />
+        <SuccessMessage condition={done} text="You have handled the prompt successfully! 🎉 The math part sure is easier than automating the test. 😅" />
         <InfoMessage condition={!done}>
             Your current answer is {answer}. Make sure to set up your test to insert the correct value.
         </InfoMessage>
