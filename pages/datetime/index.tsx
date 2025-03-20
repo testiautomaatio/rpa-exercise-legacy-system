@@ -31,7 +31,7 @@ export default function DatetimePage() {
         <Stack gap={2}>
             <Challenge title="Test page using different dates">
                 <Instructions>
-                    Use your automation tool to verify that the copyright notice below updates dynamically based on the browser's
+                    Use your test automation tool to verify that the copyright notice below updates dynamically based on the browser's
                     time. <strong>Set the time to year {expectedYear}</strong> and assert that the copyright notice is
                     displayed correctly.
                 </Instructions>

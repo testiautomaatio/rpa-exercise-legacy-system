@@ -12,7 +12,7 @@ export default function RepetitionPage() {
 
     return <>
         <Typography my={1}>
-            On this page, your task is to complete repetitive tasks efficiently using your automation tool.
+            On this page, your task is to complete repetitive tasks efficiently using your test automation tool.
         </Typography>
 
         <Stack gap={2} mt={2}>
@@ -53,7 +53,7 @@ function ManyBoxesChallenge() {
                 buttons regardless of their text.
             </Instructions>
             <Instructions>
-                Use your automation tool to check them all at once or one by one. After checking all of them, assert
+                Use your test automation tool to check them all at once or one by one. After checking all of them, assert
                 that a success message appears.
             </Instructions>
 

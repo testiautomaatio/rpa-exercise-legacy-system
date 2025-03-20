@@ -16,7 +16,7 @@ export default function FormsPage() {
         <Typography my={1}>
             Each element has a different set of attributes, such as id, name or label, and different accessibility features such as { }
             <Link href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Accessibility/WAI-ARIA_basics">aria attributes</Link>.
-            Use your automation tool to interact with the elements and assert that you receive success messages after completing each challenge.
+            Use your test automation tool to interact with the elements and assert that you receive success messages after completing each challenge.
         </Typography>
 
         <Stack gap={2} mt={2}>
@@ -49,7 +49,7 @@ function BasicInputChallenge() {
         <Instructions>
             The following input has several attributes that can be used to reference it in automated tests.
             Try writing "Hello" in the input and see the message that appears. Then, repeat the same
-            in your automation tool and verify that you get the same message.
+            in your test automation tool and verify that you get the same message.
         </Instructions>
 
         <TextField id="greeting" name="greeting" label="Greeting" variant="outlined" value={input} onChange={e => setInput(e.target.value)} />
@@ -69,7 +69,7 @@ function InputWithoutAttributesChallenge() {
         <Instructions>
             The following input has no id or name, so selecting it in an automated test can be more difficult.
             Fill in the text <em>"{msg}"</em> in the input field to see a success message. Then,
-            repeat the same in your automation tool and verify that you get the same message.
+            repeat the same in your test automation tool and verify that you get the same message.
         </Instructions>
         <Stack direction="column" alignItems="flex-start">
             <Typography component="label" variant="body2">Type "{msg}" below:</Typography>
@@ -94,7 +94,7 @@ function ReadingValuesChallenge() {
         <Challenge title="Reading values from the page">
             <Instructions>
                 Often, you need to read the value a dynamic value of an element and use it in your tests.
-                Use your automation tool to read the from the following <code>span</code> element and insert it into the
+                Use your test automation tool to read the from the following <code>span</code> element and insert it into the
                 input field. After inserting the value, assert that a success message appears.
             </Instructions>
             <Instructions>
@@ -171,7 +171,7 @@ function CheckboxChallenge() {
                 Unlike previous examples, these buttons may not be very accessible.
             </Instructions>
             <Instructions>
-                Use your automation tool to check each of the buttons one by one and assert the success message
+                Use your test automation tool to check each of the buttons one by one and assert the success message
                 to pass this challenge:
             </Instructions>
 
@@ -207,7 +207,7 @@ function DialogChallenge() {
     return <Challenge title="Alerts and prompts">
         <Instructions>
             The following button will trigger the browser's <em>prompt</em> dialog, that will expect user input.
-            Try it first manually, and then use your automation tool to handle the dialog and pass this challenge.
+            Try it first manually, and then use your test automation tool to handle the dialog and pass this challenge.
             After handling the prompt, assert that the correct success message appears.
         </Instructions>
         <Instructions>

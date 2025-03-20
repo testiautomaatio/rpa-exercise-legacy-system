@@ -48,7 +48,7 @@ function DelayedAppearanceChallenge({ milliseconds }: { milliseconds: number }) 
 
     return <Challenge title="Delayed appearance">
         <Typography>
-            A text input element will appear below after a delay. Use your automation tool to insert the text <em>Hello world</em> into
+            A text input element will appear below after a delay. Use your test automation tool to insert the text <em>Hello world</em> into
             it once it has appeared. After inserting the text, assert that a correct success message appears.
         </Typography>
         <Stack justifyContent="center" alignItems="center" gap={2} direction="row" sx={{ minHeight: theme.spacing(10) }} >
@@ -73,7 +73,7 @@ function DelayedEnablementChallenge({ milliseconds }: { milliseconds: number }) 
     return <Challenge title="Delayed enablement">
         <Typography>
             The following button is on the page from the start, but will become enabled after
-            a delay. Use your automation tool to click it to pass this challenge.
+            a delay. Use your test automation tool to click it to pass this challenge.
             After clicking, assert that a success message appears.
         </Typography>
         <Stack justifyContent="center" alignItems="center" gap={2} direction="row" >

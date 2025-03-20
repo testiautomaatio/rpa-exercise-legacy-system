@@ -26,7 +26,7 @@ export default function ResponsivePage() {
             Many sites adapt to the browser's size and shape, as well as the user's color scheme preferences.
         </Typography>
         <Typography my={1}>
-            The challenges on this page are designed to help you test how well your automation tool can interact with responsive web pages.
+            The challenges on this page are designed to help you test how well your test automation tool can interact with responsive web pages.
         </Typography>
 
         {!loading && <DarkModeChallenge />}
@@ -52,10 +52,13 @@ function DarkModeChallenge() {
             <Typography>
                 Many sites offer a dark mode to reduce eye strain and save battery life on mobile devices.
                 Your current color scheme is <strong>{theme.palette.mode}</strong>.
+                Use your test automation tool to toggle the dark mode switch on the corner of the screen and
+                assert that the page's color scheme changes.
             </Typography>
             <Typography>
-                Use your automation tool to toggle the dark mode switch on the corner of the screen and
-                assert that the page's color scheme changes.
+                After asserting that the color scheme changes, verify that a success message appears.
+                Use your test automation tool to take automated screenshots in your tests in both light and dark
+                mode. Name the screenshots <strong>screenshots/light-mode.png</strong> and <strong>screenshots/dark-mode.png</strong>.
             </Typography>
             <SuccessMessage condition={done} text="You have successfully switched between the modes! ☀️ / 🌑" />
             <InfoMessage condition={!done} text="Toggle the dark mode switch and verify that the page's color scheme changes." />
@@ -94,12 +97,20 @@ function ViewportSizeChallenge() {
                 Test this page using different screen sizes to verify that different content is displayed correctly at different resolutions.
             </Typography>
             <Typography>
-                Make your automation tool resize the browser window to match each of the following breakpoints and
-                assert that the correct content is being displayed for each resolution. The current width of your viewport
-                is <strong>{width} px ({sizeCheck(width)})</strong>.
+                Make your test automation tool resize the browser window to match each of the breakpoints described in the table below.
+                Assert that the correct content is being displayed for each resolution. Use the tool to
+                also take screenshots at each resolution. Save the screenshots with the following paths and names:
             </Typography>
-
-            <Paper sx={{ p: 2, my: 2, alignSelf: "stretch" }}>
+            <ul>
+                <li>screenshots/extra-small.png</li>
+                <li>screenshots/small.png</li>
+                <li>screenshots/medium.png</li>
+                <li>screenshots/large.png</li>
+            </ul>
+            <Paper sx={{ p: 2, alignSelf: "stretch" }}>
+                <Typography mb={2}>
+                    The current width of your viewport is <strong>{width} px ({sizeCheck(width)})</strong>.
+                </Typography>
                 <ChooseSize xs>
                     XS 🐁: Welcome to the world of cramped UI! Everything's cute at this size... except overflowing text.
                 </ChooseSize>

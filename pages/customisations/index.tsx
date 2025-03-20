@@ -68,7 +68,7 @@ function StandardSelectChallenge() {
     return <Challenge title="Standard select element">
         <Instructions>
             This challenge contains a standard <code>select</code> element with a list of animals.
-            Use your automation tool to select the <em>{correct}</em> option and assert that the page
+            Use your test automation tool to select the <em>{correct}</em> option and assert that the page
             displays the correct message message.
         </Instructions>
 
@@ -115,7 +115,7 @@ function MuiSelectChallenge() {
         <Instructions>
             The following selection element is a custom component from the <Link href="https://mui.com/material-ui/react-select/">Material-UI library</Link>.
             Although it mimicks the behavior of a standard select element, it need to be interacted with differently.
-            Use your automation tool to select the color <em>blue</em> and assert that the page displays the correct message.
+            Use your test automation tool to select the color <em>blue</em> and assert that the page displays the correct message.
         </Instructions>
 
         <Stack gap={2} direction="row" justifyContent="space-between" alignSelf="stretch">
@@ -147,7 +147,7 @@ function StandardDatePickerChallenge() {
 
     return <Challenge title="Standard date picker">
         <Instructions>
-            The following date picker is a standard HTML element. Use your automation tool to select the
+            The following date picker is a standard HTML element. Use your test automation tool to select the
             date <em>{formatDate(correct)}</em> and assert that the page displays the correct message.
         </Instructions>
 
@@ -173,7 +173,7 @@ function MuiDatePickerChallenge() {
         <Instructions>
             The following date picker is a custom component from the <Link href="https://mui.com/x/react-date-pickers/">MUI X library</Link>.
             Although it mimicks the behavior of a standard date picker, it need to be interacted with differently.
-            Use your automation tool to select the date <em>{formatDate(correctDate)}</em> and assert that the page displays the correct message.
+            Use your test automation tool to select the date <em>{formatDate(correctDate)}</em> and assert that the page displays the correct message.
         </Instructions>
         <Instructions>
             Try to write your test in a way that it will work regardless of the current date, which is the initial value of the date picker.
