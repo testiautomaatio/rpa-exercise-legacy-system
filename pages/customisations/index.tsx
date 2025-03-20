@@ -94,7 +94,7 @@ function StandardSelectChallenge() {
 
         <SuccessMessage condition={done} text="Success! You selected the correct option from a standard select element!" />
         <InfoMessage condition={!done} text={`Select the ${correct} to pass this challenge.`} />
-    </Challenge >;
+    </Challenge>;
 }
 
 
@@ -119,7 +119,7 @@ function MuiSelectChallenge() {
         </Instructions>
 
         <Stack gap={2} direction="row" justifyContent="space-between" alignSelf="stretch">
-            <FormControl fullWidth>
+            <FormControl fullWidth sx={{ flexShrink: 1, flexGrow: 1 }}>
                 <InputLabel id="demo-simple-select-label">Choose a color:</InputLabel>
                 <Select
                     id="select-color"
@@ -135,20 +135,20 @@ function MuiSelectChallenge() {
             />
         </Stack>
         <SuccessMessage condition={done} text="Success! You've selected the correct color using a custom select element! 💙" />
-        <InfoMessage condition={!done} text={`Select the color ${correct} to pass this challenge.`} />
+        <InfoMessage condition={!done} text={`Choose the color ${correct} to pass this challenge.`} />
     </Challenge>;
 }
 
 
 function StandardDatePickerChallenge() {
-    const [date, setDate] = useState("");
+    const [date, setDate] = useState<string>(dayjs().toISOString().split('T')[0]);
     const correct = "2030-01-01";
     const done = date === correct;
 
     return <Challenge title="Standard date picker">
         <Instructions>
             The following date picker is a standard HTML element. Use your automation tool to select the
-            date <em>{correct}</em> and assert that the page displays the correct message.
+            date <em>{formatDate(correct)}</em> and assert that the page displays the correct message.
         </Instructions>
 
         <input
@@ -159,12 +159,12 @@ function StandardDatePickerChallenge() {
             onChange={e => setDate(e.target.value)}
         />
         <SuccessMessage condition={done} text="Success! You've selected the correct date using a standard date picker!" />
-        <InfoMessage condition={!done} text={`Select the date ${correct} to pass this challenge.`} />
+        <InfoMessage condition={!done} text={`Select ${formatDate(correct)} to pass this challenge.`} />
     </Challenge>;
 }
 
 function MuiDatePickerChallenge() {
-    const [date, setDate] = useState<Dayjs | null>(null);
+    const [date, setDate] = useState<Dayjs | null>(dayjs());
     const correctDate = "2030-01-01";
 
     const done = date?.isSame(dayjs(correctDate), 'day') ?? false;
@@ -173,7 +173,7 @@ function MuiDatePickerChallenge() {
         <Instructions>
             The following date picker is a custom component from the <Link href="https://mui.com/x/react-date-pickers/">MUI X library</Link>.
             Although it mimicks the behavior of a standard date picker, it need to be interacted with differently.
-            Use your automation tool to select the date <em>{correctDate}</em> and assert that the page displays the correct message.
+            Use your automation tool to select the date <em>{formatDate(correctDate)}</em> and assert that the page displays the correct message.
         </Instructions>
         <Instructions>
             Try to write your test in a way that it will work regardless of the current date, which is the initial value of the date picker.
@@ -182,6 +182,11 @@ function MuiDatePickerChallenge() {
         <DatePicker label="Choose a date" onChange={setDate} value={date} />
 
         <SuccessMessage condition={done} text="Success! You've selected the correct date using a custom date picker!" />
-        <InfoMessage condition={!done} text={`Select the date ${correctDate} to pass this challenge.`} />
+        <InfoMessage condition={!done} text={`Select ${formatDate(correctDate)} to pass this challenge.`} />
     </Challenge>;
+}
+
+
+function formatDate(date: string) {
+    return dayjs(date).format("LL");
 }

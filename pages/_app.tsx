@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { NextAppProvider } from '@toolpad/core/nextjs';
-import { DashboardLayout } from '@toolpad/core/DashboardLayout';
+import { DashboardLayout, SidebarFooterProps } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
 import Head from 'next/head';
 import { AppCacheProvider } from '@mui/material-nextjs/v14-pagesRouter';
@@ -11,7 +11,7 @@ import type { Navigation } from '@toolpad/core/AppProvider';
 
 import theme from '../theme';
 import { AspectRatio, AvTimer, DynamicForm, Home, Loop, ManageHistory, Palette } from '@mui/icons-material';
-import { Stack, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import Link from 'next/link';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
@@ -66,24 +66,26 @@ const NAVIGATION: Navigation = [
 ];
 
 const BRANDING = {
-    title: 'Interaction playground',
+    title: 'Browser Interaction Playground',
     logo: <></>,
 };
 
-
+function SidebarFooter({ mini }: SidebarFooterProps) {
+    return (
+        <Typography variant="caption" sx={{ m: 1, whiteSpace: 'nowrap', overflow: 'hidden' }}>
+            <Link href="https://github.com/testiautomaatio/interaction-playground">
+                {mini ? 'GitHub' : `Project GitHub`}
+            </Link>
+        </Typography>
+    );
+}
 
 function getDefaultLayout(page: React.ReactElement) {
     return (
-        <DashboardLayout>
+        <DashboardLayout slots={{ sidebarFooter: SidebarFooter }}>
             <PageContainer sx={{ pb: 4 }}>
                 {page}
             </PageContainer>
-            <Stack justifyContent="center" alignItems="center" component="footer" pb={3}>
-                <Typography variant="body2">
-                    This is an open source web application for practicing test automation. {" "}
-                    <Link href="https://github.com/testiautomaatio/interaction-playground">See project GitHub.</Link>
-                </Typography>
-            </Stack>
         </DashboardLayout>
     );
 }

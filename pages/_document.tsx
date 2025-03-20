@@ -11,6 +11,10 @@ export default function Document(props: DocumentProps & DocumentHeadTagsProps) {
       <Head>
         <meta name="emotion-insertion-point" content="" />
         <DocumentHeadTags {...props} />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+        />
       </Head>
       <body>
         <Main />

@@ -177,24 +177,24 @@ function CheckboxChallenge() {
 
             <Stack direction="column" justifyContent="center">
                 <Stack direction="row" alignItems="center">
-                    <Checkbox name="terms-and-conditions" onClick={e => handleClick(e.target)} /> I did not read the terms and conditions
+                    <Checkbox name="terms-and-conditions" onClick={e => handleClick(e.target)} /> <span>I did not read the terms and conditions</span>
                 </Stack>
                 <Stack direction="row" alignItems="center">
-                    <Checkbox className="no-robot" onClick={e => handleClick(e.target)} /> I <strong>am not</strong> a robot
+                    <Checkbox className="no-robot" onClick={e => handleClick(e.target)} /> <span>I <strong>am not</strong> a robot</span>
                 </Stack>
                 <Stack direction="row" alignItems="center">
-                    <Checkbox id="yes-robot" onClick={e => handleClick(e.target)} /> I <strong>am</strong> a robot
+                    <Checkbox id="yes-robot" onClick={e => handleClick(e.target)} /> <span>I <strong>am</strong> a robot</span>
                 </Stack>
                 <Stack direction="row" alignItems="center">
-                    <Checkbox title="Subscribe to newsletter" onClick={e => handleClick(e.target)} /> I sure want to subscribe to a newsletter
-                </Stack>
+                    <Checkbox title="Subscribe to newsletter" onClick={e => handleClick(e.target)} /> <span>I sure want to subscribe to a newsletter</span>
+                </Stack >
                 <Stack direction="row" alignItems="center">
-                    <Checkbox onClick={e => handleClick(e.target)} /> I have checked all of the boxes
-                </Stack>
-            </Stack>
+                    <Checkbox onClick={e => handleClick(e.target)} /> <span>I have checked all of the boxes</span>
+                </Stack >
+            </Stack >
             <SuccessMessage condition={allChecked} text="Button-mashing detected. Are you testing or gaming?! 📦" />
             <InfoMessage condition={!allChecked} text={`Check each checkbox to pass this challenge. Currently checked ${checked} / ${count}.`} />
-        </Challenge>
+        </Challenge >
     );
 }
 
