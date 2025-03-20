@@ -81,7 +81,7 @@ function ManyBoxesChallenge() {
 function CounterChallenge() {
     const [clicks, setClicks] = useState(0);
 
-    const goal = 999;
+    const goal = 100;
     const done = clicks === goal;
 
     return (
