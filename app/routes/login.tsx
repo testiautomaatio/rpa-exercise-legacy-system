@@ -47,7 +47,7 @@ export default function Home() {
           :
 
           <>
-            <p style={{ padding: '0.5rem' }}>
+            <p style={{ marginBottom: 20 }}>
               Please log in to your account. This is a demo app, so you need to
               use the credentials that have been prefilled for you.
             </p>

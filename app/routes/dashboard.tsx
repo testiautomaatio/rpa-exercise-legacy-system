@@ -22,7 +22,9 @@ export default function Dashboard() {
   return (
     <>
       <Window style={{ minWidth: 800 }}>
-        <WindowHeader>automobiles.xls</WindowHeader>
+        <WindowHeader>
+          Final_CarSheet_v5_(ignore_others).xls
+        </WindowHeader>
         <WindowContent>
           <Table>
             <TableHead>
@@ -64,8 +66,8 @@ type ModalProps = { onClose: () => void, car: Car, open: boolean };
 function Modal({ onClose, car, open }: ModalProps) {
   return <dialog className="cardetails" open={open} style={{ width: 400, maxHeight: "90vh", overflow: "auto", padding: 0, borderWidth: 0 }}>
     <Window style={{ width: "100%", height: "100%" }}>
-      <WindowHeader>{car.make}</WindowHeader>
-      <WindowContent>
+      <WindowHeader>{car.make}_{car.model}.xls</WindowHeader>
+      <WindowContent style={{ display: "flex", flexDirection: "column", gap: 5 }}>
         <GroupBox label="License plate" className="licensePlate">
           {car.licensePlate}
         </GroupBox>
@@ -97,7 +99,7 @@ function Modal({ onClose, car, open }: ModalProps) {
           {car.note}
         </GroupBox>
 
-        <Button onClick={onClose} style={{ marginTop: 10 }}>Close</Button>
+        <Button onClick={onClose}>Close</Button>
       </WindowContent>
     </Window>
   </dialog>
