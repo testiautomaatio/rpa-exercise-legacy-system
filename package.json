@@ -1,33 +1,32 @@
 {
-  "name": "interaction-playground",
-  "version": "0.1.0",
+  "name": "rpa-exercise-legacy-system",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "react-router build",
+    "dev": "react-router dev",
+    "start": "react-router-serve ./build/server/index.js",
+    "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
-    "@emotion/cache": "^11",
-    "@emotion/react": "^11",
-    "@emotion/server": "^11",
-    "@emotion/styled": "^11",
-    "@mui/icons-material": "^6",
-    "@mui/material": "^6",
-    "@mui/material-nextjs": "^6",
-    "@mui/x-date-pickers": "^7.28.0",
-    "@toolpad/core": "0.13.0",
-    "dayjs": "^1.11.13",
-    "next": "^15",
-    "react": "^19",
-    "react-dom": "^19"
+    "@react-router/node": "^7.5.0",
+    "@react-router/serve": "^7.5.0",
+    "isbot": "^5.1.17",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router": "^7.5.0",
+    "react95": "^4.0.0",
+    "styled-components": "^6.1.17"
   },
   "devDependencies": {
+    "@react-router/dev": "^7.5.0",
+    "@tailwindcss/vite": "^4.0.0",
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "^15",
-    "typescript": "^5"
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.1",
+    "react-router-devtools": "^1.1.0",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.11",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }
