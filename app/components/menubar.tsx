@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { AppBar, Button, MenuList, MenuListItem, Separator, TextInput, Toolbar } from "react95";
 
 export default function MenuBar() {
+    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
 
     return (
@@ -28,13 +30,13 @@ export default function MenuBar() {
                             onClick={() => setOpen(false)}>
 
                             <MenuListItem>
-                                <a href="https://github.com/testiautomaatio/rpa-exercise-legacy-system">
+                                <a href="https://github.com/testiautomaatio/rpa-exercise-legacy-system" target="_blank">
                                     📁 GitHub
                                 </a>
                             </MenuListItem>
                             <Separator />
                             <MenuListItem>
-                                <a href="/">🔙 Logout</a>
+                                <a href="/" onClick={(e) => { e.preventDefault(); navigate('/') }}>🔙 Logout</a>
                             </MenuListItem>
                         </MenuList>
                     )}

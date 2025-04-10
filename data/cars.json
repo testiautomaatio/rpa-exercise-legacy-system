@@ -2,6 +2,7 @@
     {
         "make": "DeLorean",
         "model": "DMC-12",
+        "vin": "undefined",
         "year": 1981,
         "mileage": 88200,
         "owner": "Dr. Emmett Brown",
@@ -15,6 +16,7 @@
     {
         "make": "Pontiac",
         "model": "Firebird Trans Am",
+        "vin": "NaN",
         "year": 1982,
         "mileage": 143000,
         "owner": "Michael Knight",
@@ -28,6 +30,7 @@
     {
         "make": "Chevrolet",
         "model": "Impala",
+        "vin": "[object Object]",
         "year": 1967,
         "mileage": 250000,
         "owner": "Dean Winchester",
@@ -41,6 +44,7 @@
     {
         "make": "Ford",
         "model": "Anglia",
+        "vin": "null",
         "year": 1962,
         "mileage": 104000,
         "owner": "Arthur Weasley",
@@ -54,6 +58,7 @@
     {
         "make": "Mini",
         "model": "Cooper",
+        "vin": "undefined is not a function",
         "year": 1972,
         "mileage": 72000,
         "owner": "Mr. Bean",
@@ -67,6 +72,7 @@
     {
         "make": "Toyota",
         "model": "Supra",
+        "vin": "[unexpected T_PAAMAYIM_NEKUDOTAYIM]",
         "year": 1994,
         "mileage": 89000,
         "owner": "Brian O'Conner",
@@ -80,6 +86,7 @@
     {
         "make": "Dodge",
         "model": "Charger R/T",
+        "vin": "'; drop table cars --",
         "year": 1970,
         "mileage": 102300,
         "owner": "Dominic Toretto",
@@ -93,6 +100,7 @@
     {
         "make": "Porsche",
         "model": "911 Carrera",
+        "vin": "alert('Hacked!')",
         "year": 1998,
         "mileage": 62000,
         "owner": "Lara Croft",
@@ -106,6 +114,7 @@
     {
         "make": "Batmobile",
         "model": "Tumbler",
+        "vin": "[Function (anonymous)]",
         "year": 2005,
         "mileage": 5400,
         "owner": "Bruce Wayne",
@@ -119,6 +128,7 @@
     {
         "make": "Warthog",
         "model": "M12",
+        "vin": "Cannot modify header information - headers already sent",
         "year": 2552,
         "mileage": 4600,
         "owner": "Master Chief",
@@ -132,6 +142,7 @@
     {
         "make": "Volkswagen",
         "model": "Beetle",
+        "vin": "cgi-bin/sh: line 1: unexpected EOF while looking for matching `",
         "year": 1968,
         "mileage": 85000,
         "owner": "Herbie",
@@ -145,6 +156,7 @@
     {
         "make": "Ford",
         "model": "Model T",
+        "vin": "Exception in thread \"main\" java.lang.NullPointerException",
         "year": 1927,
         "mileage": 120000,
         "owner": "Henry Ford",
@@ -158,6 +170,7 @@
     {
         "make": "Aston Martin",
         "model": "DB5",
+        "vin": "cannot find symbol",
         "year": 1964,
         "mileage": 30000,
         "owner": "James Bond",
