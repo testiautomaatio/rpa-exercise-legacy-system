@@ -15,6 +15,7 @@ export default function Home() {
 
   const [loading, setLoading] = useState(false);
   const [percent, setPercent] = useState(0);
+  const [randomPass] = useState(() => Math.random().toString(36).slice(2, 10));
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,10 +57,10 @@ export default function Home() {
               onSubmit={handleSubmit}>
               <label>
                 Username
-                <TextInput id="username" value="dwight" />
+                <TextInput id="username" value="admin" />
               </label>
               <label>Password
-                <TextInput id="password" type="password" value="letmein" />
+                <TextInput id="random-password" type="password" value={randomPass} />
               </label>
               <Button style={{ marginLeft: 4 }} type="submit">
                 Log in

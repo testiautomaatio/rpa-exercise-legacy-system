@@ -114,7 +114,7 @@
         "color": "Matte Black",
         "streetLegal": false,
         "licensePlate": "DKNT-01",
-        "note": "Military-grade vehicle with stealth mode and a rocket booster."
+        "note": "Vehicle with stealth mode and a rocket booster."
     },
     {
         "make": "Warthog",
@@ -127,6 +127,45 @@
         "color": "Olive Green",
         "streetLegal": false,
         "licensePlate": "UNSC117",
-        "note": "All-terrain UNSC vehicle with a rear-mounted chaingun."
+        "note": "All-terrain UNSC vehicle."
+    },
+    {
+        "make": "Volkswagen",
+        "model": "Beetle",
+        "year": 1968,
+        "mileage": 85000,
+        "owner": "Herbie",
+        "source": "The Love Bug",
+        "fuelType": "Gasoline",
+        "color": "White with red and blue stripes",
+        "streetLegal": true,
+        "licensePlate": "HERBIE",
+        "note": "A sentient car with a mind of its own."
+    },
+    {
+        "make": "Ford",
+        "model": "Model T",
+        "year": 1927,
+        "mileage": 120000,
+        "owner": "Henry Ford",
+        "source": "Real Life",
+        "fuelType": "Gasoline",
+        "color": "Black",
+        "streetLegal": true,
+        "licensePlate": "MODEL-T",
+        "note": "The first mass-produced car."
+    },
+    {
+        "make": "Aston Martin",
+        "model": "DB5",
+        "year": 1964,
+        "mileage": 30000,
+        "owner": "James Bond",
+        "source": "James Bond",
+        "fuelType": "Gasoline",
+        "color": "Silver Birch",
+        "streetLegal": true,
+        "licensePlate": "BOND007",
+        "note": "Equipped with gadgets."
     }
 ]

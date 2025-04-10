@@ -1,4 +1,4 @@
-import { Button, GroupBox, Table, TableBody, TableDataCell, TableHead, TableHeadCell, TableRow, Window, WindowContent, WindowHeader } from "react95";
+import { Button, Checkbox, GroupBox, NumberInput, Table, TableBody, TableDataCell, TableHead, TableHeadCell, TableRow, TextInput, Window, WindowContent, WindowHeader } from "react95";
 import type { Route } from "./+types/dashboard";
 import cars from "../../data/cars.json";
 import { useState } from "react";
@@ -81,7 +81,7 @@ function Modal({ onClose, car, open }: ModalProps) {
           {car.year}
         </GroupBox>
         <GroupBox label="Mileage" className="mileage">
-          {car.mileage}
+          <NumberInput value={car.mileage} min={0} max={1000000} step={1000} />
         </GroupBox>
         <GroupBox label="Owner" className="owner">
           {car.owner}
@@ -93,10 +93,10 @@ function Modal({ onClose, car, open }: ModalProps) {
           {car.color}
         </GroupBox>
         <GroupBox label="Street legal" className="streetLegal">
-          {car.streetLegal ? 'yes' : 'no'}
+          <Checkbox checked={car.streetLegal} label={car.streetLegal ? 'yes' : 'no'} disabled />
         </GroupBox>
         <GroupBox label="Note" className="note">
-          {car.note}
+          <TextInput value={car.note} multiline />
         </GroupBox>
 
         <Button onClick={onClose}>Close</Button>
