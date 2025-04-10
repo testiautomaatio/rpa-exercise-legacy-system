@@ -21,7 +21,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <Window style={{ minWidth: 800 }}>
+      <Window >
         <WindowHeader>
           Final_CarSheet_v5_(ignore_others).xls
         </WindowHeader>
