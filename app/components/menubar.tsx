@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { AppBar, Button, MenuList, MenuListItem, Separator, TextInput, Toolbar } from "react95";
 
@@ -51,9 +51,15 @@ export default function MenuBar() {
 function Clock() {
     const [time, setTime] = useState(new Date());
 
-    setInterval(() => {
-        setTime(new Date());
-    }, 1000);
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTime(new Date());
+        }, 1000);
+
+        return () => {
+            clearInterval(interval);
+        }
+    }, []);
 
     const strTime = time.getHours() + ':' + leftPad(time.getMinutes()) + ':' + leftPad(time.getSeconds());
     const strDate = time.getDate() + '.' + (time.getMonth() + 1) + '.' + (time as any).getYear();

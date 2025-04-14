@@ -66,7 +66,7 @@ type ModalProps = { onClose: () => void, car: Car, open: boolean };
 function Modal({ onClose, car, open }: ModalProps) {
   const [activeTab, setActiveTab] = useState(0);
 
-  return <dialog className="cardetails" open={open} style={{ width: 550, maxHeight: "90vh", overflow: "auto", padding: 0, borderWidth: 0 }}>
+  return <dialog className="cardetails" open={open} style={{ width: 550, overflow: "auto", padding: 0, borderWidth: 0 }}>
     <Window style={{ width: "100%", height: "100%" }}>
       <WindowHeader>{car.make}_{car.model}.xls</WindowHeader>
       <WindowContent>
