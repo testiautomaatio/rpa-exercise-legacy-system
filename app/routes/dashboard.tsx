@@ -103,7 +103,7 @@ function Modal({ onClose, car, open }: ModalProps) {
 
           {activeTab === 1 && <>
             <GroupBox label="Mileage" className="mileage">
-              <NumberInput value={car.mileage} min={0} max={1000000} step={1000} />
+              <NumberInput defaultValue={car.mileage} min={0} max={1000000} step={1000} />
             </GroupBox>
             <GroupBox label="Owner" className="owner">
               {car.owner}
@@ -115,7 +115,7 @@ function Modal({ onClose, car, open }: ModalProps) {
               <Checkbox checked={car.streetLegal} label={car.streetLegal ? 'yes' : 'no'} disabled />
             </GroupBox>
             <GroupBox label="Note" className="note">
-              <TextInput value={car.note} multiline />
+              <TextInput defaultValue={car.note} multiline />
             </GroupBox>
           </>}
         </TabBody>
